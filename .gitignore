@@ -1,0 +1,39 @@
+# Environment variables
+.env
+
+# Temporary files
+*-temp.json
+bucket-policy-temp.json
+oai-config-temp.json
+distribution-config-temp.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.history/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# AWS credentials (never commit these!)
+.aws/
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+env/
+
+# Node modules (if added in future)
+node_modules/
