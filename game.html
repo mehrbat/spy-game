@@ -106,10 +106,20 @@
             font-size: 2em;
             font-weight: bold;
             color: #333;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             word-wrap: break-word;
             max-width: 100%;
             text-align: center;
+        }
+
+        .description {
+            font-size: 0.9em;
+            color: #666;
+            font-style: italic;
+            word-wrap: break-word;
+            max-width: 100%;
+            text-align: center;
+            line-height: 1.4;
         }
 
         .spy-message {
@@ -198,6 +208,7 @@
         let currentPlayer = 0;
         let spyIndices = [];
         let currentWord = '';
+        let currentDescription = '';
         let wordRevealed = false;
 
         // Fetch words from the file
@@ -205,12 +216,21 @@
             try {
                 const response = await fetch('words.txt');
                 const text = await response.text();
-                allWords = text.split('\n').map(word => word.trim()).filter(word => word.length > 0);
+                allWords = text.split('\n')
+                    .map(line => line.trim())
+                    .filter(line => line.length > 0)
+                    .map(line => {
+                        const [word, description] = line.split(',').map(s => s.trim());
+                        return { word, description };
+                    });
                 availableWords = [...allWords];
                 console.log(`Loaded ${allWords.length} words`);
             } catch (error) {
                 console.error('Error loading words:', error);
-                allWords = ['Apple', 'Tokyo', 'Einstein', 'Pizza', 'Chair', 'Opera House'];
+                allWords = [
+                    { word: 'Apple', description: 'A common red or green fruit' },
+                    { word: 'Tokyo', description: 'Capital city of Japan' }
+                ];
                 availableWords = [...allWords];
             }
         }
@@ -267,10 +287,12 @@
             }
             
             const randomIndex = Math.floor(Math.random() * availableWords.length);
-            currentWord = availableWords[randomIndex];
+            const wordObj = availableWords[randomIndex];
+            currentWord = wordObj.word;
+            currentDescription = wordObj.description;
             
             // Move word to used list
-            usedWords.push(currentWord);
+            usedWords.push(wordObj);
             availableWords.splice(randomIndex, 1);
             
             // Pick spies based on player count - 1 spy per 5 players
@@ -299,7 +321,10 @@
             if (isSpy) {
                 wordDisplay.innerHTML = '<div class="spy-message">You are a spy! 🕵️</div>';
             } else {
-                wordDisplay.innerHTML = `<div class="word">${currentWord}</div>`;
+                wordDisplay.innerHTML = `
+                    <div class="word">${currentWord}</div>
+                    <div class="description">${currentDescription}</div>
+                `;
             }
             
             actionButton.textContent = 'I got it';

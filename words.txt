@@ -1,79 +1,200 @@
-Apple
-Tokyo
-Einstein
-Pizza
-Chair
-Opera House
-France
-Colosseum
-Banana
-Train
-Shakespeare
-Brazil
-Sun
-Sushi
-Lamp
-Great Barrier Reef
-London
-Taj Mahal
-Orange
-Mozart
-Tacos
-Table
-Bicycle
-Egypt
-Uluru
-Mango
-Moon
-Cleopatra VII
-Statue Of Liberty
-Croissant
-Refrigerator
-Australia
-Stars
-Twelve Apostles
-Strawberry
-Napoleon
-Great Wall
-Pasta
-Car
-Beijing
-Pyramids
-Grape
-Television
-Marie Curie
-Harbour Bridge
-Earth
-Canada
-Curry
-Watermelon
-Airplane
-Leonardo
-Machu Picchu
-Kakadu
-Pineapple
-Rome
-Burger
-Comet
-Gandhi
-Stonehenge
-Bondi
-Kiwi
-Boat
-India
-Paella
-Cleopatra
-Big Ben
-Daintree
-Peach
-Meteor
-Beethoven
-Golden Gate Bridge
-Kimchi
-Blue Mountains
-Galaxy
-Ramen
-Cradle
-Planet
-Satellite
-Telescope
+Cherry,Sweet red fruit often used in pies
+Berlin,Capital city of Germany
+Newton,English physicist who discovered gravity
+Hamburger,Popular American sandwich with beef patty
+Sofa,Comfortable furniture for sitting or lying
+Eiffel Tower,Iconic iron tower in Paris France
+Spain,European country known for flamenco and paella
+Parthenon,Ancient Greek temple in Athens
+Coconut,Tropical fruit with hard shell and white flesh
+Bus,Large vehicle for public transportation
+Homer,Ancient Greek poet who wrote the Odyssey
+Russia,Largest country in the world by area
+Venus,Second planet from the Sun
+Tempura,Japanese dish of deep-fried vegetables or seafood
+Desk,Furniture piece for working or studying
+Niagara Falls,Famous waterfalls on US-Canada border
+Paris,Capital city of France known for romance
+Petra,Ancient city carved into rock in Jordan
+Lemon,Yellow citrus fruit with sour taste
+Vivaldi,Italian composer famous for Four Seasons
+Falafel,Middle Eastern fried chickpea balls
+Mirror,Reflective surface for viewing yourself
+Motorcycle,Two-wheeled motorized vehicle
+Greece,Mediterranean country known for ancient history
+Mount Fuji,Iconic snow-capped volcano in Japan
+Papaya,Tropical orange fruit rich in vitamins
+Jupiter,Largest planet in our solar system
+Joan Of Arc,French heroine who led armies at age 17
+Christ Redeemer,Giant statue of Jesus in Rio de Janeiro
+Tiramisu,Italian coffee-flavored dessert
+Microwave,Kitchen appliance that heats food quickly
+Germany,Central European country known for engineering
+Neptune,Eighth planet from the Sun
+Angkor Wat,Massive temple complex in Cambodia
+Blueberry,Small blue fruit rich in antioxidants
+Columbus,Explorer who sailed to Americas in 1492
+Acropolis,Ancient citadel in Athens Greece
+Noodles,Long thin strips of pasta or dough
+Helicopter,Aircraft with rotating blades overhead
+Seoul,Capital city of South Korea
+Sphinx,Ancient Egyptian statue with lion body
+Avocado,Green fruit with creamy texture and large pit
+Radio,Device for broadcasting or receiving sound waves
+Tesla,Electric car company or famous inventor
+Louvre Museum,World's largest art museum in Paris
+Mercury,Smallest planet closest to the Sun
+Mexico,Country known for tacos and ancient pyramids
+Pho,Vietnamese noodle soup with herbs
+Pomegranate,Red fruit filled with juicy seeds
+Submarine,Naval vessel that operates underwater
+Michelangelo,Renaissance artist who painted Sistine Chapel
+Forbidden City,Imperial palace complex in Beijing China
+Kakadu Falls,Spectacular waterfalls in Northern Territory Australia
+Lime,Green citrus fruit used in drinks and cooking
+Moscow,Capital city of Russia
+Kebab,Middle Eastern grilled meat on skewer
+Mars,Fourth planet known as the Red Planet
+Darwin,Scientist who developed theory of evolution
+Alhambra,Moorish palace and fortress in Granada Spain
+Fraser Island,World's largest sand island in Queensland
+Dragon Fruit,Exotic pink fruit with white spotted flesh
+Ship,Large watercraft for ocean travel
+China,Most populous country in East Asia
+Gyoza,Japanese pan-fried dumplings
+Socrates,Ancient Greek philosopher and teacher
+Tower Bridge,Famous drawbridge across Thames in London
+Whitsundays,Group of tropical islands in Queensland
+Plum,Purple or red stone fruit
+Saturn,Planet famous for its spectacular rings
+Picasso,Spanish painter who co-founded Cubism
+Arc De Triomphe,Monumental arch in Paris honoring soldiers
+Empanadas,Latin American stuffed pastry pockets
+Grampians,Mountain range in Victoria Australia
+Comet Halley,Famous comet visible every 75 years
+Dim Sum,Chinese small plates served with tea
+Ningaloo Reef,Coral reef in Western Australia
+Asteroid,Rocky object orbiting the Sun
+Binoculars,Handheld device for viewing distant objects
+Microscope,Instrument for viewing tiny objects
+Pear,Sweet fruit wider at bottom than top
+Athens,Capital of Greece and birthplace of democracy
+Galileo,Italian astronomer who improved the telescope
+Neuschwanstein,Fairytale castle in Bavaria Germany
+Schnitzel,Austrian breaded fried meat cutlet
+Wilsons Promontory,Southernmost point of Australian mainland
+Nebula,Cloud of gas and dust in space
+Burritos,Mexican flour tortilla wrapped around filling
+Freycinet,National park in Tasmania with pink beaches
+Uranus,Seventh planet tilted on its side
+Gnocchi,Italian potato dumplings
+Litchfield,National park with waterfalls in Northern Territory
+Blackhole,Region in space with extreme gravity
+Cassini,NASA spacecraft that studied Saturn
+Mars Rover,Robotic vehicle exploring the Martian surface
+Apricot,Small orange stone fruit
+Istanbul,Turkish city spanning Europe and Asia
+Copernicus,Astronomer who proposed heliocentric model
+Versailles,Opulent French palace near Paris
+Tortilla,Thin flatbread made from corn or wheat
+Kangaroo Island,Island off South Australia coast
+Milky Way,Our home galaxy containing billions of stars
+Enchiladas,Mexican rolled tortillas with sauce
+Kata Tjuta,Group of ancient rock domes in Northern Territory
+Supernova,Explosive death of a massive star
+Hubble,Space telescope orbiting Earth since 1990
+Space Station,Orbiting laboratory for scientific research
+Guava,Tropical fruit with pink flesh and seeds
+Vienna,Austrian capital known for classical music
+Curie,Pioneering scientist who studied radioactivity
+Buckingham Palace,Official London residence of British monarch
+Baguette,Long thin French bread with crispy crust
+Port Arthur,Historic convict settlement in Tasmania
+Aurora,Natural light display in polar skies
+Lasagna,Italian layered pasta with sauce and cheese
+Rottnest Island,Island near Perth famous for quokkas
+Eclipse,Astronomical event where one body blocks another
+Voyager,NASA spacecraft exploring beyond solar system
+Apollo,NASA program that landed humans on Moon
+Fig,Sweet fruit eaten fresh or dried
+Amsterdam,Dutch capital famous for canals and bikes
+Sistine Chapel,Vatican chapel with Michelangelo's ceiling
+Fondue,Swiss melted cheese dish for dipping
+Barossa Valley,Famous wine region in South Australia
+Quasar,Extremely bright distant galaxy core
+Tagliatelle,Flat ribbon-shaped Italian pasta
+Kings Canyon,Spectacular gorge in Northern Territory
+Pulsar,Rapidly spinning neutron star
+Galileo Probe,NASA spacecraft that studied Jupiter
+Lunar Module,Spacecraft that landed on the Moon
+Lisbon,Capital of Portugal with colorful buildings
+Archimedes,Ancient Greek mathematician and inventor
+Mont Saint Michel,Island abbey in Normandy France
+Baklava,Sweet Middle Eastern pastry with nuts and honey
+Flinders Ranges,Ancient mountain range in South Australia
+Cosmos,The universe seen as an ordered whole
+Ravioli,Italian pasta pockets filled with cheese or meat
+Purnululu,National park with orange beehive domes
+Meteorite,Space rock that reaches Earth's surface
+Sputnik,First artificial satellite launched by USSR
+Challenger,Space shuttle that tragically exploded in 1986
+Nectarine,Smooth-skinned variety of peach
+Dublin,Capital of Ireland famous for pubs
+Faraday,Scientist who discovered electromagnetic induction
+Sagrada Familia,Unfinished basilica in Barcelona by Gaudi
+Pastrami,Seasoned smoked beef deli meat
+Cradle Mountain,Iconic peak in Tasmania wilderness
+Andromeda,Nearest major galaxy to Milky Way
+Fettuccine,Thick flat ribbon-shaped pasta
+Lamington,Australian cake covered in chocolate and coconut
+Red Giant,Dying star that has expanded enormously
+Kepler,Space telescope that searches for exoplanets
+Discovery,NASA space shuttle that flew 39 missions
+Raspberry,Small red berry with sweet-tart flavor
+Prague,Capital of Czech Republic with medieval architecture
+Hawking,Physicist famous for black hole research
+Ayers Rock,Aboriginal name for Uluru sacred sandstone
+Shawarma,Middle Eastern meat cooked on vertical rotisserie
+Lake Eyre,Australia's largest salt lake in outback
+Orion,Prominent constellation visible worldwide
+Carbonara,Italian pasta with eggs bacon and cheese
+Uluru Sunset,Spectacular color change of sacred rock at dusk
+White Dwarf,Dense remnant of a dead star
+Hubble Telescope,Famous space telescope named after astronomer
+Endeavour,NASA space shuttle that flew 25 missions
+Tangerine,Small sweet citrus fruit easy to peel
+Copenhagen,Capital of Denmark known for cycling culture
+Mandela,South African leader who fought apartheid
+Hagia Sophia,Historic mosque and church in Istanbul
+Hummus,Middle Eastern chickpea and tahini dip
+Simpson Desert,Vast red sand desert in central Australia
+Solar Flare,Sudden eruption of energy from Sun
+Pappardelle,Wide flat ribbon pasta from Tuscany
+Kakadu Escarpment,Dramatic sandstone cliffs in Northern Territory
+Neutron Star,Incredibly dense collapsed star remnant
+Apollo Eleven,Mission that first landed humans on Moon
+Columbia,First space shuttle in NASA's fleet
+Grapefruit,Large citrus fruit with bitter-sweet taste
+Brussels,Capital of Belgium famous for chocolates
+Aristotle,Ancient Greek philosopher and scientist
+Palace Of Versailles,Lavish French royal residence with gardens
+Moussaka,Greek baked dish with eggplant and meat
+Great Ocean Road,Scenic coastal drive in Victoria Australia
+Black Hole,Region where gravity prevents light escaping
+Linguine,Long thin flat pasta from Genoa
+Bungle Bungles,Striped orange rock formations in Western Australia
+Supernova Remnant,Expanding cloud from exploded star
+International Station,Orbiting laboratory with astronauts from many nations
+Atlantis,NASA space shuttle that flew 33 missions
+Blackberry,Dark purple berry growing on thorny bushes
+Stockholm,Capital of Sweden built on 14 islands
+Plato,Ancient Greek philosopher who founded the Academy
+Westminster Abbey,Historic church in London for coronations
+Tzatziki,Greek yogurt dip with cucumber and garlic
+Kimberley Region,Remote wilderness in northwestern Australia
+Event Horizon,Point of no return around black hole
+Rigatoni,Large tube-shaped pasta with ridges
+Wave Rock,Natural rock formation shaped like breaking wave
+Dark Matter,Invisible substance making up most of universe
+Curiosity Rover,NASA rover exploring Mars since 2012
+Enterprise,Fictional starship or first space shuttle prototype

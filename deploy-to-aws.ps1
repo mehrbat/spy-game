@@ -20,9 +20,53 @@ if (Test-Path ".env") {
 $BUCKET_NAME = "spy-game-$BUCKET_GUID"
 $DISTRIBUTION_COMMENT = "Spy Game CloudFront Distribution"
 
+# Optional custom domain config
+# Set these in .env:
+#   CUSTOM_DOMAIN=spy.rez.run           # CloudFront alias
+#   ACM_CERT_DOMAIN=rez.run             # Domain to match ACM cert (or *.rez.run)
+#   ACM_CERT_ARN=arn:aws:acm:us-east-1:...  # Explicit ARN override (optional)
+$CUSTOM_DOMAIN = if ($CUSTOM_DOMAIN) { $CUSTOM_DOMAIN } else { "spy.rez.run" }
+$ACM_CERT_DOMAIN = $ACM_CERT_DOMAIN
+$ACM_CERT_ARN = $ACM_CERT_ARN
+
+function Get-AcmCertificateArnForDomain {
+    param(
+        [Parameter(Mandatory=$true)] [string] $DomainName,
+        [Parameter(Mandatory=$true)] [string] $AwsProfile
+    )
+    $acmRegion = "us-east-1" # CloudFront requires ACM certs in us-east-1
+    try {
+        $list = aws acm list-certificates --region $acmRegion --profile $AwsProfile --certificate-statuses ISSUED --output json | ConvertFrom-Json
+        $candidates = @()
+        if ($list -and $list.CertificateSummaryList) { $candidates = $list.CertificateSummaryList }
+
+        # Build possible names to try, in priority order
+        $tryNames = New-Object System.Collections.Generic.List[string]
+        $tryNames.Add($DomainName)
+        if (-not $DomainName.StartsWith("*.", [System.StringComparison]::Ordinal)) {
+            $tryNames.Add("*.$DomainName")
+        }
+        $firstDot = $DomainName.IndexOf('.')
+        if ($firstDot -gt 0) {
+            $base = $DomainName.Substring($firstDot + 1)
+            $tryNames.Add("*.$base")
+        }
+
+        foreach ($name in $tryNames) {
+            $m = $candidates | Where-Object { $_.DomainName -eq $name } | Select-Object -First 1
+            if ($m) { return $m.CertificateArn }
+        }
+    } catch {
+        Write-Host "✗ Failed to query ACM certificates in us-east-1" -ForegroundColor Red
+    }
+    return $null
+}
+
 Write-Host "=== Spy Game AWS Deployment ===" -ForegroundColor Cyan
 Write-Host "Bucket Name: $BUCKET_NAME" -ForegroundColor Yellow
 Write-Host "Region: $AWS_REGION" -ForegroundColor Yellow
+Write-Host "Custom Domain: $CUSTOM_DOMAIN" -ForegroundColor Yellow
+if ($ACM_CERT_DOMAIN) { Write-Host "ACM Cert Domain: $ACM_CERT_DOMAIN" -ForegroundColor Yellow }
 Write-Host ""
 
 # Check if bucket exists
@@ -115,11 +159,29 @@ if ($existingDistribution) {
     
     $s3Origin = "$BUCKET_NAME.s3.$AWS_REGION.amazonaws.com"
     
+    # Ensure we have an ACM certificate if using a custom domain
+    if (-not $ACM_CERT_ARN) {
+        $lookupName = if ($ACM_CERT_DOMAIN) { $ACM_CERT_DOMAIN } else { $CUSTOM_DOMAIN }
+        Write-Host "Looking up ACM certificate in us-east-1 for: $lookupName" -ForegroundColor Green
+        $ACM_CERT_ARN = Get-AcmCertificateArnForDomain -DomainName $lookupName -AwsProfile $AWS_PROFILE
+    }
+    if (-not $ACM_CERT_ARN) {
+        $hint = if ($ACM_CERT_DOMAIN) { $ACM_CERT_DOMAIN } else { $CUSTOM_DOMAIN }
+        Write-Host "✗ Could not find ACM certificate for $hint in us-east-1. Set ACM_CERT_ARN in .env or create/validate the cert." -ForegroundColor Red
+        exit 1
+    }
+    Write-Host "✓ Using ACM certificate: $ACM_CERT_ARN" -ForegroundColor Green
+    Write-Host "✓ Setting CloudFront alias: $CUSTOM_DOMAIN" -ForegroundColor Green
+    
     $distributionConfig = @"
 {
     "CallerReference": "$BUCKET_GUID-$(Get-Date -Format 'yyyyMMddHHmmss')",
     "Comment": "$DISTRIBUTION_COMMENT",
     "DefaultRootObject": "game.html",
+    "Aliases": {
+        "Quantity": 1,
+        "Items": ["$CUSTOM_DOMAIN"]
+    },
     "Origins": {
         "Quantity": 1,
         "Items": [
@@ -157,6 +219,12 @@ if ($existingDistribution) {
             "Enabled": false,
             "Quantity": 0
         }
+    },
+    "ViewerCertificate": {
+        "ACMCertificateArn": "$ACM_CERT_ARN",
+        "CloudFrontDefaultCertificate": false,
+        "SSLSupportMethod": "sni-only",
+        "MinimumProtocolVersion": "TLSv1.2_2021"
     },
     "Enabled": true,
     "PriceClass": "PriceClass_All"
@@ -223,6 +291,62 @@ if ($LASTEXITCODE -eq 0) {
     exit 1
 }
 
+# If distribution existed, update it to attach domain and cert
+if ($existingDistribution) {
+    Write-Host "Updating existing CloudFront distribution with domain and certificate..." -ForegroundColor Green
+    $getCfg = aws cloudfront get-distribution-config --id $distributionId --profile $AWS_PROFILE --output json | ConvertFrom-Json
+    if (-not $getCfg) {
+        Write-Host "✗ Failed to fetch distribution config" -ForegroundColor Red
+        exit 1
+    }
+
+    # Ensure we have an ACM certificate
+    if (-not $ACM_CERT_ARN) {
+        $lookupName = if ($ACM_CERT_DOMAIN) { $ACM_CERT_DOMAIN } else { $CUSTOM_DOMAIN }
+        Write-Host "Looking up ACM certificate in us-east-1 for: $lookupName" -ForegroundColor Green
+        $ACM_CERT_ARN = Get-AcmCertificateArnForDomain -DomainName $lookupName -AwsProfile $AWS_PROFILE
+    }
+    if (-not $ACM_CERT_ARN) {
+        $hint = if ($ACM_CERT_DOMAIN) { $ACM_CERT_DOMAIN } else { $CUSTOM_DOMAIN }
+        Write-Host "✗ Could not find ACM certificate for $hint in us-east-1. Set ACM_CERT_ARN in .env or create/validate the cert." -ForegroundColor Red
+        exit 1
+    }
+    Write-Host "✓ Using ACM certificate: $ACM_CERT_ARN" -ForegroundColor Green
+    Write-Host "✓ Updating CloudFront alias: $CUSTOM_DOMAIN" -ForegroundColor Green
+
+    $cfg = $getCfg.DistributionConfig
+
+    # Set aliases
+    $cfg.Aliases = [PSCustomObject]@{
+        Quantity = 1
+        Items    = @($CUSTOM_DOMAIN)
+    }
+
+    # Set viewer certificate
+    $cfg.ViewerCertificate = [PSCustomObject]@{
+        ACMCertificateArn     = $ACM_CERT_ARN
+        CloudFrontDefaultCertificate = $false
+        SSLSupportMethod      = "sni-only"
+        MinimumProtocolVersion = "TLSv1.2_2021"
+    }
+
+    $tmpCfgPath = "distribution-config-update-temp.json"
+    $cfg | ConvertTo-Json -Depth 100 | Out-File -FilePath $tmpCfgPath -Encoding utf8
+
+    $etag = $getCfg.ETag
+    Write-Host "Submitting distribution update to CloudFront..." -ForegroundColor Green
+    $upd = aws cloudfront update-distribution --id $distributionId --if-match $etag --distribution-config file://$tmpCfgPath --profile $AWS_PROFILE --output json | ConvertFrom-Json
+    Write-Host "Update status: $($upd.Distribution.Status) | Domain: $($upd.Distribution.DomainName)" -ForegroundColor Yellow
+    Remove-Item $tmpCfgPath
+
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host "✓ CloudFront distribution updated with domain and cert" -ForegroundColor Green
+    } else {
+        Write-Host "✗ Failed to update CloudFront distribution" -ForegroundColor Red
+        exit 1
+    }
+}
+
 # Display results
 Write-Host ""
 Write-Host "=== AWS Setup Complete ===" -ForegroundColor Cyan
@@ -232,6 +356,7 @@ Write-Host "Region: $AWS_REGION" -ForegroundColor Yellow
 Write-Host ""
 Write-Host "CloudFront Distribution ID: $distributionId" -ForegroundColor Yellow
 Write-Host "CloudFront URL: https://$distributionDomain/game.html" -ForegroundColor Yellow
+Write-Host "Custom Domain: https://$CUSTOM_DOMAIN/game.html" -ForegroundColor Yellow
 Write-Host ""
 Write-Host "Note: CloudFront distribution may take 15-20 minutes to fully deploy if newly created." -ForegroundColor Cyan
 Write-Host "Check distribution status: aws cloudfront get-distribution --id $distributionId --profile $AWS_PROFILE" -ForegroundColor Cyan
@@ -241,3 +366,4 @@ Write-Host ""
 Write-Host "Next steps:" -ForegroundColor Cyan
 Write-Host "  1. Wait for CloudFront distribution to deploy (if newly created)" -ForegroundColor White
 Write-Host "  2. Run .\deploy-files.ps1 to upload game files" -ForegroundColor White
+Write-Host "  3. Ensure DNS: Create an ALIAS/CNAME for $CUSTOM_DOMAIN -> $distributionDomain" -ForegroundColor White
