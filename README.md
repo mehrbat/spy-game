@@ -4,7 +4,7 @@ A fun multiplayer party game where players pass a phone around to secretly view 
 
 ## 🎮 Live Demo
 
-Play now: [https://d37vbuug1v710i.cloudfront.net/game.html](https://d37vbuug1v710i.cloudfront.net/game.html)
+Play now: [https://spy.rez.run](https://spy.rez.run)
 
 ## 📝 Description
 
