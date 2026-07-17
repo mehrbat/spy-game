@@ -1,6 +1,6 @@
 # 🕵️ Spy Game
 
-A fun multiplayer party game where players pass a phone around to secretly view words, with hidden spies among them!
+A fun single-device multiplayer party game where players pass a phone around to secretly view words, with hidden spies among them!
 
 ## 🎮 Live Demo
 
